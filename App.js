@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
+import { Alert, Pressable, Text, View } from "react-native";
+import MessagesScreen from "./app/screens/MessagesScreen";
+
 import ViewImageScreen from "./app/screens/ViewImageScreen";
-import WelcomeScreen from "./app/screens/WelcomeScreen";
 
 export default function App() {
-  return <ViewImageScreen />;
+  return <MessagesScreen />;
 }
