@@ -1,22 +1,26 @@
 import React, { useState } from "react";
-import { FlatList, View } from "react-native";
-import ListItem from "../components/ListItem";
-import ListItemDeleteAction from "../components/ListItemDeleteAction";
-import ListItemSeperator from "../components/ListItemSeperator";
+import { FlatList, StyleSheet, View } from "react-native";
+
 import Screen from "../components/Screen";
+import {
+  ListItem,
+  ListItemDeleteAction,
+  ListItemSeparator,
+} from "../components/lists";
 
 const initialMessages = [
   {
     id: 1,
-    title: "T1",
-    description: "D1",
-    image: require("../assets/justice.jpg"),
+    title: "Mosh Hamedani",
+    description: "Hey! Is this item still available?",
+    image: require("../assets/mosh.jpg"),
   },
   {
     id: 2,
-    title: "T2",
-    description: "D2",
-    image: require("../assets/justice.jpg"),
+    title: "Mosh Hamedani",
+    description:
+      "I'm interested in this item. When will you be able to post it?",
+    image: require("../assets/mosh.jpg"),
   },
 ];
 
@@ -25,6 +29,7 @@ function MessagesScreen(props) {
   const [refreshing, setRefreshing] = useState(false);
 
   const handleDelete = (message) => {
+    // Delete the message from messages
     setMessages(messages.filter((m) => m.id !== message.id));
   };
 
@@ -35,16 +40,16 @@ function MessagesScreen(props) {
         keyExtractor={(message) => message.id.toString()}
         renderItem={({ item }) => (
           <ListItem
-            image={item.image}
             title={item.title}
             subTitle={item.description}
-            onPress={() => console.log("Message selectd", item)}
+            image={item.image}
+            onPress={() => console.log("Message selected", item)}
             renderRightActions={() => (
               <ListItemDeleteAction onPress={() => handleDelete(item)} />
             )}
           />
         )}
-        ItemSeparatorComponent={ListItemSeperator}
+        ItemSeparatorComponent={ListItemSeparator}
         refreshing={refreshing}
         onRefresh={() => {
           setMessages([
@@ -52,7 +57,7 @@ function MessagesScreen(props) {
               id: 2,
               title: "T2",
               description: "D2",
-              image: require("../assets/justice.jpg"),
+              image: require("../assets/mosh.jpg"),
             },
           ]);
         }}
@@ -60,5 +65,7 @@ function MessagesScreen(props) {
     </Screen>
   );
 }
+
+const styles = StyleSheet.create({});
 
 export default MessagesScreen;

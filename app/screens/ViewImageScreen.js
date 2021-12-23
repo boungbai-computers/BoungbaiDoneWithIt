@@ -10,7 +10,6 @@ function ViewImageScreen(props) {
       <View style={styles.closeIcon}>
         <MaterialCommunityIcons name="close" color="white" size={35} />
       </View>
-
       <View style={styles.deleteIcon}>
         <MaterialCommunityIcons
           name="trash-can-outline"
@@ -18,7 +17,6 @@ function ViewImageScreen(props) {
           size={35}
         />
       </View>
-
       <Image
         resizeMode="contain"
         style={styles.image}

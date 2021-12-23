@@ -19,7 +19,7 @@ function Icon({
         alignItems: "center",
       }}
     >
-      <MaterialCommunityIcons size={size * 0.5} name={name} color={iconColor} />
+      <MaterialCommunityIcons name={name} color={iconColor} size={size * 0.5} />
     </View>
   );
 }

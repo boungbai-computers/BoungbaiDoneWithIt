@@ -1,12 +1,10 @@
 import React from "react";
-import { FlatList, StyleSheet, View } from "react-native";
-import Icon from "../components/Icon";
+import { StyleSheet, View, FlatList } from "react-native";
 
-import ListItem from "../components/ListItem";
-import ListItemSeperator from "../components/ListItemSeperator";
-
-import Screen from "../components/Screen";
+import { ListItem, ListItemSeparator } from "../components/lists";
 import colors from "../config/colors";
+import Icon from "../components/Icon";
+import Screen from "../components/Screen";
 
 const menuItems = [
   {
@@ -30,21 +28,20 @@ function AccountScreen(props) {
     <Screen style={styles.screen}>
       <View style={styles.container}>
         <ListItem
-          image={require("../assets/justice.jpg")}
-          title="Justice Johnson"
-          subTitle="justlyjohn198@gmail.com"
+          title="Mosh Hamedani"
+          subTitle="programmingwithmosh@gmail.com"
+          image={require("../assets/mosh.jpg")}
         />
       </View>
-
       <View style={styles.container}>
         <FlatList
           data={menuItems}
           keyExtractor={(menuItem) => menuItem.title}
-          ItemSeparatorComponent={ListItemSeperator}
+          ItemSeparatorComponent={ListItemSeparator}
           renderItem={({ item }) => (
             <ListItem
               title={item.title}
-              ItemComponent={
+              IconComponent={
                 <Icon
                   name={item.icon.name}
                   backgroundColor={item.icon.backgroundColor}
@@ -54,21 +51,20 @@ function AccountScreen(props) {
           )}
         />
       </View>
-
       <ListItem
         title="Log Out"
-        ItemComponent={<Icon name="logout" backgroundColor="#ffe66d" />}
+        IconComponent={<Icon name="logout" backgroundColor="#ffe66d" />}
       />
     </Screen>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    marginVertical: 20,
-  },
   screen: {
     backgroundColor: colors.light,
+  },
+  container: {
+    marginVertical: 20,
   },
 });
 
