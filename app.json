@@ -28,6 +28,7 @@
     },
     "web": {
       "favicon": "./app/assets/favicon.png"
-    }
+    },
+    "githubUrl": "https://github.com/boungbai-computers/BoungbaiDoneWithIt.git"
   }
 }
