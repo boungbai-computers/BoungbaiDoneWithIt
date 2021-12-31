@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import Notifications from "expo-notifications";
-import * as Persmissions from "expo-permissions";
+import * as Permissions from "expo-permissions";
 
 import AccountNavigator from "./AccountNavigator";
 import FeedNavigator from "./FeedNavigator";
 import ListingEditScreen from "../screens/ListingEditScreen";
 import NewListingButton from "./NewListingButton";
+import routes from "./routes";
 
 const Tab = createBottomTabNavigator();
 
@@ -17,30 +17,20 @@ const AppNavigator = () => {
   }, []);
 
   const registerForPushNotifications = async () => {
-    try {
-      const permission = await Persmissions.askAsync(
-        Persmissions.NOTIFICATIONS
-      );
-      if (!permission.granted) return;
-
-      const token = await Notifications.getExpoPushTokenAsync();
-      cosnole.log(token);
-    } catch (error) {
-      console.log("Error getting a push token", error);
-    }
+    const permission = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+    if (!permission.granted) return;
   };
 
   return (
     <Tab.Navigator>
       <Tab.Screen
-        options={{
-          headerShown: false,
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons color={color} name="home" size={size} />
-          ),
-        }}
         name="Feed"
         component={FeedNavigator}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="home" color={color} size={size} />
+          ),
+        }}
       />
       <Tab.Screen
         name="ListingEdit"
@@ -48,10 +38,16 @@ const AppNavigator = () => {
         options={({ navigation }) => ({
           tabBarButton: () => (
             <NewListingButton
-              onPress={() => navigation.navigate("ListingEdit")}
+              onPress={() => navigation.navigate(routes.LISTING_EDIT)}
             />
           ),
-          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons
+              name="plus-circle"
+              color={color}
+              size={size}
+            />
+          ),
         })}
       />
       <Tab.Screen
@@ -59,7 +55,7 @@ const AppNavigator = () => {
         component={AccountNavigator}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons color={color} name="account" size={size} />
+            <MaterialCommunityIcons name="account" color={color} size={size} />
           ),
         }}
       />
